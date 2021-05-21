@@ -52,12 +52,12 @@ export default {
     },
     mounted() {
         const firebaseConfig = {
-            apiKey: process.envapiKey,
-            authDomain: process.envauthDomain,
-            projectId: process.envprojectId,
-            storageBucket: process.envstorageBucket,
-            messagingSenderId: process.envmessagingSenderId,
-            appId: process.envappId,
+            apiKey: process.env.VUE_APP_apiKey,
+            authDomain: process.env.VUE_APP_authDomain,
+            projectId: process.env.VUE_APP_projectId,
+            storageBucket: process.env.VUE_APP_storageBucket,
+            messagingSenderId: process.env.VUE_APP_messagingSenderId,
+            appId: process.env.VUE_APP_appId,
         };
 
         const db = firebase.initializeApp(firebaseConfig).firestore();
