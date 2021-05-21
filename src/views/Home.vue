@@ -2,9 +2,11 @@
     <div id="main">
         <div class="input">
             <p class="logo">Knong Jit</p>
+            <p class="description">People have many things in our mind, but sometimes cannot speak out. Knong jit will read and publish your inner thought.</p>
             <div class="user-input">
-                <input type="text" ref="thought" />
-                <button @click="clickAddThought">Add your inner thought</button>
+                <p class="label">Something in your mind (50 letters max)</p>
+                <input type="text" ref="thought" maxlength="50" />
+                <button @click="clickAddThought">Add Thought</button>
             </div>
         </div>
     </div>
@@ -52,12 +54,12 @@ export default {
     },
     mounted() {
         const firebaseConfig = {
-            apiKey: process.envapiKey,
-            authDomain: process.envauthDomain,
-            projectId: process.envprojectId,
-            storageBucket: process.envstorageBucket,
-            messagingSenderId: process.envmessagingSenderId,
-            appId: process.envappId,
+            apiKey: process.env.VUE_APP_apiKey,
+            authDomain: process.env.VUE_APP_authDomain,
+            projectId: process.env.VUE_APP_projectId,
+            storageBucket: process.env.VUE_APP_storageBucket,
+            messagingSenderId: process.env.VUE_APP_messagingSenderId,
+            appId: process.env.VUE_APP_appId,
         };
 
         const db = firebase.initializeApp(firebaseConfig).firestore();
@@ -73,9 +75,17 @@ p {
 
 .logo {
     font-size: 24px;
-    font-weight: bold;
     opacity: 0.7;
+    margin: 0 0 20px 0;
+}
+
+.description {
+    margin: 0 30px;
     margin-bottom: 100px;
+}
+
+.label {
+    margin-bottom: 10px;
 }
 
 .user-input {
@@ -92,17 +102,19 @@ input {
     border: none;
     text-align: center;
     font-size: 21px;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
 button {
     width: 200px;
-    color: black;
+    color: rgba(0, 0, 0, 0.8);
     background-color: white;
-    padding: 10px 20px;
+    padding: 12px 15px;
     border: none;
     margin-top: 20px;
     cursor: pointer;
+    font-size: 16px;
+    border-radius: 8px;
 }
 
 button:hover {
