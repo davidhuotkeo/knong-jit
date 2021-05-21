@@ -74,8 +74,8 @@ p {
 }
 
 .logo {
-    font-size: 24px;
-    opacity: 0.7;
+    font-size: 28px;
+    opacity: 1;
     margin: 0 0 20px 0;
 }
 
