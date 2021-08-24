@@ -29,9 +29,13 @@ export default {
             return `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`
         },
         readThought() {
+            const now = new Date();
+            const last2Day = new Date(now.setDate(now.getDate() - 7));
+
             this.db
                 .collection("knongjit")
                 .orderBy("date", "desc")
+                .where("date", ">=", last2Day)
                 .get()
                 .then((querySnapshot) => {
                     const tempDoc = querySnapshot.docs.map((doc) => {
@@ -48,7 +52,6 @@ export default {
         },
     },
     mounted() {
-        console.log(process.env.VUE_APP_apiKey);
         const firebaseConfig = {
             apiKey: process.env.VUE_APP_apiKey,
             authDomain: process.env.VUE_APP_authDomain,
