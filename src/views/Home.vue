@@ -5,7 +5,7 @@
             <p class="description">People have many things in our mind, but sometimes cannot speak out. Knong jit will read and publish your inner thought.</p>
             <div class="user-input">
                 <p class="label">Something in your mind (50 letters max)</p>
-                <input type="text" ref="thought" maxlength="50" />
+                <input type="text" v-model="thought" maxlength="50" />
                 <button @click="clickAddThought">Add Thought</button>
             </div>
         </div>
@@ -20,14 +20,15 @@ export default {
     data() {
         return {
             db: null,
+            thought: ""
         };
     },
     methods: {
-        addThought(thoughtInput) {
+        addThought() {
             const dateTime = firebase.firestore.Timestamp.fromDate(new Date());
             this.db
                 .collection("knongjit")
-                .add({ date: dateTime, thought: thoughtInput })
+                .add({ date: dateTime, thought: this.thought })
                 .then(() =>
                     this.$notify({
                         group: "noti",
@@ -36,11 +37,11 @@ export default {
                         type: "success"
                     })
                 );
+            this.thought = ""
         },
         clickAddThought() {
-            const thoughtInput = this.$refs.thought.value;
-            if (thoughtInput) {
-                this.addThought(thoughtInput);
+            if (this.thought) {
+                this.addThought();
             } else {
                 this.$notify({
                     group: "noti",
