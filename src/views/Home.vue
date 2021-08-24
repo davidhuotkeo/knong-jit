@@ -1,12 +1,21 @@
 <template>
     <div id="main">
+         <p class="logo"><img src="../image/Group 2.png" alt=""></p>
         <div class="input">
-            <p class="logo">Knong Jit</p>
-            <p class="description">People have many things in our mind, but sometimes cannot speak out. Knong jit will read and publish your inner thought.</p>
+            
+            <img src="../image/Vector.png" alt="">
+           <h1>Dump your anxiety </h1>
+            <p class="description">Write down your thought below and we will publish it on<br><br>our social media to spread it globally </p>
             <div class="user-input">
-                <p class="label">Something in your mind (50 letters max)</p>
-                <input type="text" v-model="thought" maxlength="50" />
-                <button @click="clickAddThought">Add Thought</button>
+                <p class="label">Your thought</p>
+                <p id="word">{{thought.length}} words</p>
+                <!-- <input type="text" placeholder="Your thought title" v-model="thought" /> -->
+  <textarea name="message" rows="10" cols="30" placeholder="Your thought title" v-model="thought">The cat was playing in the garden.</textarea>
+                <button @click="clickAddThought">Submit</button>
+            </div>
+            <div class="icon">
+                 <a href="https://www.facebook.com/Knong-Jit-189215103175125/"  target="_blank"><img   src="../image/fb.png" alt=""></a>
+                <a href="https://www.instagram.com/knong_jit/" target="_blank"><img  id="ig" src="../image/instagram.png" alt=""></a>
             </div>
         </div>
     </div>
@@ -70,6 +79,17 @@ export default {
 </script>
 
 <style scoped>
+#ig{
+    position:absolute;
+    right:47%
+}
+.icon{
+position: relative;
+top: 5%;
+left: -4%;
+
+
+}
 p {
     margin: 0;
 }
@@ -77,16 +97,22 @@ p {
 .logo {
     font-size: 28px;
     opacity: 1;
-    margin: 0 0 20px 0;
+    margin: -20px 0 20px 0;
 }
 
 .description {
+    font-size: 13px;
+    font-family: "Epilogue";
+    font-weight: 400;
     margin: 0 30px;
     margin-bottom: 100px;
 }
 
 .label {
     margin-bottom: 10px;
+    position:relative;
+    right: 17%;
+    
 }
 
 .user-input {
@@ -95,15 +121,21 @@ p {
     align-items: center;
     font-family: "Epilogue";
 }
-
-input {
-    width: 40%;
-    height: 40px;
+textarea{
+      width: 40%;
+    height: 133px;
     outline: none;
     border: none;
-    text-align: center;
     font-size: 21px;
-    border-radius: 8px;
+    
+}
+input {
+    width: 40%;
+    height: 133px;
+    outline: none;
+    border: none;
+    font-size: 21px;
+    
 }
 
 button {
@@ -115,7 +147,7 @@ button {
     margin-top: 20px;
     cursor: pointer;
     font-size: 16px;
-    border-radius: 8px;
+    font-weight: bold;
 }
 
 button:hover {
@@ -132,10 +164,31 @@ button:hover {
     flex-direction: column;
     justify-content: center;
 }
+#word{
+    position: absolute;
+    right: 30%;
+}
 
 @media only screen and (max-width: 500px) {
     input {
         width: 90% !important;
+        height:133px    ;
+    }
+    #word{
+         right: 5%;
+    }
+    textarea{
+        width: 90% !important;
+        height:133px    ;
+
+    }
+    #ig{
+    right: 40%;
+    }
+    .label
+    {
+        right: 34%;
+
     }
 }
 </style>
