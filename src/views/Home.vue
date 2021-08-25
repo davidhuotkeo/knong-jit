@@ -21,7 +21,7 @@
             <div class="user-input">
                 <div class="input-items">
                     <p class="label">Your thought</p>
-                    <p id="word">{{ thought.length }} words</p>
+                    <p id="word">{{ thought.length }} letters</p>
                 </div>
                 <!-- <input type="text" placeholder="Your thought title" v-model="thought" /> -->
                 <textarea
@@ -127,6 +127,7 @@ export default {
 
 #logo {
     width: 200px;
+    margin-top: 20px;
 }
 
 p {
@@ -134,7 +135,7 @@ p {
 }
 
 #anxiety-image {
-    width: 250px;
+    width: 170px;
 }
 
 .knong-jit-title {
@@ -189,7 +190,7 @@ button:hover {
 }
 
 .icon {
-    margin-bottom: 60px;
+    margin: 20px 0;
 }
 
 .icon > *:first-child {
@@ -198,7 +199,7 @@ button:hover {
 
 @media only screen and (min-width: 1000px) {
     .description {
-        width: 30vw;
+        width: 40vw;
     }
 
     textarea {
