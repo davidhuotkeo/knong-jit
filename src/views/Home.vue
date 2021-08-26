@@ -12,15 +12,14 @@
                     src="@/assets/anxiety-illustration.svg"
                     alt="Line anxiety image"
                 />
-                <p class="knong-jit-title">Dump your anxiety</p>
+                <p class="knong-jit-title">Free your mind</p>
                 <p class="description">
-                    Write down your thought below and we will publish it on our
-                    social media to spread it globally
+                    Bottling up emotions and thoughts aren’t always easy. Maybe in the end, we all walk down the same paths?
                 </p>
             </div>
             <div class="user-input">
                 <div class="input-items">
-                    <p class="label">Your thought</p>
+                    <p class="label">Your thoughts</p>
                     <p id="word">{{ thought.length }} letters</p>
                 </div>
                 <!-- <input type="text" placeholder="Your thought title" v-model="thought" /> -->
@@ -28,7 +27,7 @@
                     name="message"
                     rows="10"
                     cols="30"
-                    placeholder="Your thought title"
+                    placeholder="Let us know..."
                     v-model="thought"
                 >
 The cat was playing in the garden.</textarea
@@ -147,7 +146,7 @@ p {
 .description {
     font-size: 16px;
     font-weight: 500;
-    line-height: 19px;
+    line-height: 24px;
     max-width: 50vw;
 }
 

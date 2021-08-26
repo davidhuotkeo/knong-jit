@@ -78,6 +78,10 @@ export default {
     line-height: 110px;
 }
 
+.title > div {
+    line-height: 100px;
+}
+
 .input-data {
     display: flex;
     flex-direction: column;
