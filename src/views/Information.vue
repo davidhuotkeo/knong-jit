@@ -5,7 +5,8 @@
 </template>
 
 <script>
-import firebase from "firebase";
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 import Grid from "gridjs-vue";
 
 export default {
