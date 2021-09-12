@@ -1,28 +1,67 @@
 <template>
     <div id="main">
         <div class="input">
-            <p class="logo">Knong Jit</p>
-            <p class="description">People have many things in our mind, but sometimes cannot speak out. Knong jit will read and publish your inner thought.</p>
-            <div class="user-input">
-                <p class="label">Something in your mind (50 letters max)</p>
-                <input type="text" v-model="thought" maxlength="50" />
-                <button @click="clickAddThought">Add Thought</button>
+            
+            <img
+                id="logo"
+                src="@/assets/knong-jit-logo.svg"
+                alt="knong jit logo"
+            />
+            <div class="content">
+                <img
+                    id="anxiety-image"
+                    src="@/assets/anxiety-illustration.svg"
+                    alt="Line anxiety image"
+                />
+                <p class="knong-jit-title">Free your mind</p>
+                <p class="description">
+                    Bottling up emotions and thoughts aren’t always easy. Maybe in the end, we all walk down the same paths?
+                </p>
             </div>
+            <div class="user-input">
+                <div class="input-items">
+                    <p class="label">Your thoughts</p>
+                    <p id="word">{{ thought.length }} letters</p>
+                </div>
+                <!-- <input type="text" placeholder="Your thought title" v-model="thought" /> -->
+                <textarea
+                    name="message"
+                    rows="10"
+                    cols="30"
+                    placeholder="Let us know..."
+                    v-model="thought"
+                >
+The cat was playing in the garden.</textarea
+                >
+                <button @click="clickAddThought">Submit</button>
+            </div>
+        </div>
+        <div class="icon">
+            <a
+                href="https://www.facebook.com/Knong-Jit-189215103175125/"
+                target="_blank"
+                ><img src="../image/fb.png" alt=""
+            /></a>
+            <a href="https://www.instagram.com/knong_jit/" target="_blank"
+                ><img id="ig" src="../image/instagram.png" alt=""
+            /></a>
         </div>
     </div>
 </template>
 
 <script>
-import firebase from "firebase";
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 
 export default {
     name: "App",
     data() {
         return {
             db: null,
-            thought: ""
+            thought: "",
         };
     },
+    
     methods: {
         addThought() {
             const dateTime = firebase.firestore.Timestamp.fromDate(new Date());
@@ -34,10 +73,10 @@ export default {
                         group: "noti",
                         title: "Successfully sent",
                         text: "Admin will take a look and post this",
-                        type: "success"
+                        type: "success",
                     })
                 );
-            this.thought = ""
+            this.thought = "";
         },
         clickAddThought() {
             if (this.thought) {
@@ -46,8 +85,7 @@ export default {
                 this.$notify({
                     group: "noti",
                     title: "Input must not be empty",
-                    text:
-                        "Hey there, it seems like you dont have anything to say?",
+                    text: "Hey there, it seems like you dont have anything to say?",
                     type: "error",
                 });
             }
@@ -70,58 +108,6 @@ export default {
 </script>
 
 <style scoped>
-p {
-    margin: 0;
-}
-
-.logo {
-    font-size: 28px;
-    opacity: 1;
-    margin: 0 0 20px 0;
-}
-
-.description {
-    margin: 0 30px;
-    margin-bottom: 100px;
-}
-
-.label {
-    margin-bottom: 10px;
-}
-
-.user-input {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: "Epilogue";
-}
-
-input {
-    width: 40%;
-    height: 40px;
-    outline: none;
-    border: none;
-    text-align: center;
-    font-size: 21px;
-    border-radius: 8px;
-}
-
-button {
-    width: 200px;
-    color: rgba(0, 0, 0, 0.8);
-    background-color: white;
-    padding: 12px 15px;
-    border: none;
-    margin-top: 20px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 8px;
-}
-
-button:hover {
-    background-color: whitesmoke;
-}
-
 #main {
     background-color: black;
     color: white;
@@ -133,9 +119,129 @@ button:hover {
     justify-content: center;
 }
 
+.input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    justify-content: space-around;
+}
+
+#logo {
+    width: 200px;
+    margin-top: 20px;
+}
+
+p {
+    margin: 0;
+}
+
+#anxiety-image {
+    width: 170px;
+}
+
+.knong-jit-title {
+    font-size: 32px;
+    font-weight: bolder;
+    margin: 32px 0 8px 0;
+}
+
+.description {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    max-width: 50vw;
+}
+
+.input-items {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.user-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+textarea {
+    height: 133px;
+    width: 60vw;
+    padding: 16px;
+    outline: none;
+    border: none;
+    font-size: 16px;
+}
+
+button {
+    width: 200px;
+    color: rgba(0, 0, 0, 0.8);
+    background-color: white;
+    padding: 12px 15px;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #CFD0D1;
+}
+
+.icon {
+    margin: 20px 0;
+}
+
+.icon > *:first-child {
+    margin-right: 20px;
+}
+
+@media only screen and (min-width: 1000px) {
+    .description {
+        width: 40vw;
+    }
+
+    textarea {
+        max-width: 50vw;
+    }
+}
+
 @media only screen and (max-width: 500px) {
-    input {
-        width: 90% !important;
+    p {
+        font-size: 14px;
+    }
+
+    .knong-jit-title {
+        font-size: 24px;
+    }
+
+    #logo {
+        width: 150px;
+    }
+
+    #anxiety-image {
+        width: 175px;
+    }
+
+    #word {
+        right: 5%;
+    }
+
+    .description {
+        max-width: 90vw;
+        font-size: 14px;
+    }
+
+    textarea {
+        width: calc(90vw - 32px);
+        height: 90px;
+    }
+
+    .icon {
+        margin-bottom: 20px;
     }
 }
 </style>
