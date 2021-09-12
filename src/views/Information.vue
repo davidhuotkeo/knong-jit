@@ -1,7 +1,9 @@
 <template>
     <div class="about">
         <grid :cols="col" :rows="row" />
+        
     </div>
+    
 </template>
 
 <script>
@@ -51,6 +53,13 @@ export default {
                     });
                 });
         },
+    },
+    created()
+    {
+            if(localStorage.login!=1){
+                 this.$router.push('/AdminLogin')
+
+            }
     },
     mounted() {
         const firebaseConfig = {

@@ -1,3 +1,17 @@
+<script>
+export default {
+    data(){
+        return{
+
+        }
+    },created(){
+         if(localStorage.login!=1){
+                 this.$router.push('/AdminLogin')
+
+            }
+    }
+}
+</script>
 <template>
     <div>
         <button @click="$router.push('/Information')">Information</button>

@@ -37,7 +37,14 @@ export default {
                 result.appendChild(canvas)
             })
         }
-    }
+    },
+       created()
+    {
+            if(localStorage.login!=1){
+                 this.$router.push('/AdminLogin')
+
+            }
+    },
 };
 </script>
 

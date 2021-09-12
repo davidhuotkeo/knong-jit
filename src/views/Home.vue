@@ -1,6 +1,7 @@
 <template>
     <div id="main">
         <div class="input">
+            
             <img
                 id="logo"
                 src="@/assets/knong-jit-logo.svg"
@@ -60,6 +61,7 @@ export default {
             thought: "",
         };
     },
+    
     methods: {
         addThought() {
             const dateTime = firebase.firestore.Timestamp.fromDate(new Date());
