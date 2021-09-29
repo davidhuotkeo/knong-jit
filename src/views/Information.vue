@@ -80,4 +80,7 @@ export default {
 </script>
 
 <style scoped>
+.about{
+line-height: 26pt;
+}
 </style>

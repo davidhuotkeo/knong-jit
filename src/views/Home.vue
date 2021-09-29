@@ -25,7 +25,7 @@
                 </div>
                 <div class="input-items">
                     <p class="label">Your story</p>
-                    <p id="word">{{ thought.length }} letters</p>
+                    <p id="word">{{ thought.split(" ").length }} words</p>
                 </div>
                
                 <textarea
