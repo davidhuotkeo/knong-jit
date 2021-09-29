@@ -15,7 +15,7 @@ export default {
     data() {
         return {
             db: null,
-            col: ["date", "thought"],
+            col: ["date", "Title","Thought"],
             row: [],
         };
     },
@@ -47,7 +47,7 @@ export default {
                     tempDoc.forEach((element) => {
                         let data = [];
                         data.push(this.timeFormat(element.date.seconds, element.date.nanoseconds));
-                        data.push(element.thought);
+                        data.push(element.title,element.thought);
 
                         this.row.push(data);
                     });
@@ -80,4 +80,7 @@ export default {
 </script>
 
 <style scoped>
+.about{
+line-height: 26pt;
+}
 </style>

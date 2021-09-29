@@ -17,7 +17,8 @@ export default {
         verifyLogin(){
             if(this.username==process.env.VUE_APP_USERNAME && this.password==process.env.VUE_APP_PASSWORD){
                 localStorage.login=1
-                this.$router.push('/Admin')
+                location.replace('/Admin')
+                // this.$router.push('/Admin')
             }
             else{
                 this.$notify({
