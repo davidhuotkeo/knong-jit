@@ -69,9 +69,14 @@ export default {
     
     methods: {
         addThought() {
+            const currentEnv = process.env.VUE_APP_environment;
+            let collectionName = "knongjit"
+            if (currentEnv == "development") {
+                collectionName = "knongjitDevelopment"
+            }
             const dateTime = firebase.firestore.Timestamp.fromDate(new Date());
             this.db
-                .collection("knongjit")
+                .collection(collectionName)
                 .add({ date: dateTime, title:this.title,thought: this.thought })
                 .then(() =>
                     this.$notify({
