@@ -32,13 +32,19 @@ export default {
             return `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`
         },
         readThought() {
+            const currentEnv = process.env.VUE_APP_environment;
+            let collectionName = "knongjit"
+            if (currentEnv == "development") {
+                collectionName = "knongjitDevelopment"
+            }
+
             const now = new Date();
-            const last2Day = new Date(now.setDate(now.getDate() - 7));
+            const lastDay = new Date(now.setDate(now.getDate() - 7));
 
             this.db
-                .collection("knongjit")
+                .collection(collectionName)
                 .orderBy("date", "desc")
-                .where("date", ">=", last2Day)
+                .where("date", ">=", lastDay)
                 .get()
                 .then((querySnapshot) => {
                     const tempDoc = querySnapshot.docs.map((doc) => {
