@@ -69,7 +69,24 @@ export default {
     
     methods: {
         addThought() {
-            const dateTime = firebase.firestore.Timestamp.fromDate(new Date());
+            if(process.env.VUE_APP_environment=="development"){
+                  const dateTime = firebase.firestore.Timestamp.fromDate(new Date());
+            this.db
+                .collection("knongjitDevelopment")
+                .add({ date: dateTime, title:this.title,thought: this.thought })
+                .then(() =>
+                    this.$notify({
+                        group: "noti",
+                        title: "Testing Successfully Sent",
+                        text: "Admin will take a look and post this",
+                        type: "success",
+                    })
+                );
+            this.thought = "";
+            this.title="";
+
+            }else{
+                 const dateTime = firebase.firestore.Timestamp.fromDate(new Date());
             this.db
                 .collection("knongjit")
                 .add({ date: dateTime, title:this.title,thought: this.thought })
@@ -83,6 +100,8 @@ export default {
                 );
             this.thought = "";
             this.title="";
+            }
+           
         },
         clickAddThought() {
             if (this.thought &&this.title) {

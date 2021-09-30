@@ -32,7 +32,29 @@ export default {
             return `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`
         },
         readThought() {
-            const now = new Date();
+             if(process.env.VUE_APP_environment=="development"){
+                  const now = new Date();
+            const last2Day = new Date(now.setDate(now.getDate() - 7));
+
+            this.db
+                .collection("knongjitDevelopment")
+                .orderBy("date", "desc")
+                .where("date", ">=", last2Day)
+                .get()
+                .then((querySnapshot) => {
+                    const tempDoc = querySnapshot.docs.map((doc) => {
+                        return { id: doc.id, ...doc.data() };
+                    });
+                    tempDoc.forEach((element) => {
+                        let data = [];
+                        data.push(this.timeFormat(element.date.seconds, element.date.nanoseconds));
+                        data.push(element.title,element.thought);
+
+                        this.row.push(data);
+                    });
+                });
+             }else{
+                  const now = new Date();
             const last2Day = new Date(now.setDate(now.getDate() - 7));
 
             this.db
@@ -52,6 +74,8 @@ export default {
                         this.row.push(data);
                     });
                 });
+             }
+           
         },
     },
     created()
