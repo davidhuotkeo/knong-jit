@@ -89,8 +89,12 @@ export default {
             this.thought = "";
             this.title="";
         },
+         isEmpty(value){
+            return !value.split(" ").join("").length; 
+           
+        },
         clickAddThought() {
-            if (this.thought &&this.title) {
+           if(!this.isEmpty(this.thought)&&!this.isEmpty(this.title)){
                 this.addThought();
             } else {
                 this.$notify({
@@ -99,8 +103,7 @@ export default {
                     text: "Hey there, it seems like you dont have anything to say?",
                     type: "error",
                 });
-            }
-        },
+                     }}        
     },
     mounted() {
         const firebaseConfig = {
@@ -161,6 +164,7 @@ input {
     outline: none;
     border: none;
     font-size: 16px;
+    border-radius: 8px;
     
 }
 #anxiety-image {
@@ -201,6 +205,8 @@ textarea {
     outline: none;
     border: none;
     font-size: 16px;
+        border-radius: 8px;
+
 }
 
 button {
