@@ -1,7 +1,6 @@
 <template>
     <div id="main">
         <div class="input">
-            
             <img
                 id="logo"
                 src="@/assets/knong-jit-logo.svg"
@@ -39,6 +38,7 @@ The cat was playing in the garden.</textarea
                 >
                 <button @click="clickAddThought">Submit</button>
             </div>
+
         </div>
         <div class="icon">
             <a
@@ -69,9 +69,25 @@ export default {
     
     methods: {
         addThought() {
-            const dateTime = firebase.firestore.Timestamp.fromDate(new Date());
+            if(process.env.VUE_APP_environment=="development"){
+                  const dateTime = firebase.firestore.Timestamp.fromDate(new Date());
             this.db
-                .collection("knongjit")
+                .collection("knongjitDevelopment")
+                .add({ date: dateTime, title:this.title,thought: this.thought })
+                .then(() =>
+                    this.$notify({
+                        group: "noti",
+                        title: "Testing Successfully Sent",
+                        text: "Admin will take a look and post this",
+                        type: "success",
+                    })
+                );
+            this.thought = "";
+            this.title="";
+            }else{
+                 const dateTime = firebase.firestore.Timestamp.fromDate(new Date());
+            this.db
+                .collection(this.VUE_APP_environment)
                 .add({ date: dateTime, title:this.title,thought: this.thought })
                 .then(() =>
                     this.$notify({
@@ -83,6 +99,8 @@ export default {
                 );
             this.thought = "";
             this.title="";
+            }
+           
         },
         clickAddThought() {
             if (this.thought &&this.title) {
@@ -156,6 +174,8 @@ input {
     outline: none;
     border: none;
     font-size: 16px;
+        border-radius: 8px;
+
     
 }
 #anxiety-image {
@@ -195,6 +215,7 @@ textarea {
     padding: 16px;
     outline: none;
     border: none;
+    border-radius: 8px;
     font-size: 16px;
 }
 
