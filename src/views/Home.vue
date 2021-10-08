@@ -1,6 +1,7 @@
 <template>
     <div id="main">
         <div class="input">
+            
             <img
                 id="logo"
                 src="@/assets/knong-jit-logo.svg"
@@ -12,23 +13,26 @@
                     src="@/assets/anxiety-illustration.svg"
                     alt="Line anxiety image"
                 />
-                <p class="knong-jit-title">Dump your anxiety</p>
+                <p class="knong-jit-title">Free your mind</p>
                 <p class="description">
-                    Write down your thought below and we will publish it on our
-                    social media to spread it globally
+                    Bottling up emotions and thoughts aren’t always easy. Maybe in the end, we all walk down the same paths?
                 </p>
             </div>
             <div class="user-input">
-                <div class="input-items">
-                    <p class="label">Your thought</p>
-                    <p id="word">{{ thought.length }} letters</p>
+                <div>
+                    <p class="title-style">Your title</p>
+                     <input type="text" placeholder="Let us know..." v-model="title" />
                 </div>
-                <!-- <input type="text" placeholder="Your thought title" v-model="thought" /> -->
+                <div class="input-items">
+                    <p class="label">Your story</p>
+                    <p id="word">{{ thought.split(" ").length }} words</p>
+                </div>
+               
                 <textarea
                     name="message"
                     rows="10"
                     cols="30"
-                    placeholder="Your thought title"
+                    placeholder="Let us know..."
                     v-model="thought"
                 >
 The cat was playing in the garden.</textarea
@@ -50,7 +54,8 @@ The cat was playing in the garden.</textarea
 </template>
 
 <script>
-import firebase from "firebase";
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 
 export default {
     name: "App",
@@ -58,14 +63,21 @@ export default {
         return {
             db: null,
             thought: "",
+            title:"",
         };
     },
+    
     methods: {
         addThought() {
+            const currentEnv = process.env.VUE_APP_environment;
+            let collectionName = "knongjit"
+            if (currentEnv == "development") {
+                collectionName = "knongjitDevelopment"
+            }
             const dateTime = firebase.firestore.Timestamp.fromDate(new Date());
             this.db
-                .collection("knongjit")
-                .add({ date: dateTime, thought: this.thought })
+                .collection(collectionName)
+                .add({ date: dateTime, title:this.title,thought: this.thought })
                 .then(() =>
                     this.$notify({
                         group: "noti",
@@ -75,9 +87,10 @@ export default {
                     })
                 );
             this.thought = "";
+            this.title="";
         },
         clickAddThought() {
-            if (this.thought) {
+            if (this.thought &&this.title) {
                 this.addThought();
             } else {
                 this.$notify({
@@ -106,6 +119,13 @@ export default {
 </script>
 
 <style scoped>
+.title-style{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 8px;
+    margin-top: 15px;
+}
 #main {
     background-color: black;
     color: white;
@@ -133,7 +153,16 @@ export default {
 p {
     margin: 0;
 }
-
+input {
+    /* margin-top: 5%; */
+       height: 25px;
+    width: 50vw;
+    padding: 16px;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    
+}
 #anxiety-image {
     width: 170px;
 }
@@ -147,7 +176,7 @@ p {
 .description {
     font-size: 16px;
     font-weight: 500;
-    line-height: 19px;
+    line-height: 24px;
     max-width: 50vw;
 }
 
@@ -156,6 +185,7 @@ p {
     justify-content: space-between;
     width: 100%;
     margin-bottom: 8px;
+    margin-top: 15px;
 }
 
 .user-input {
@@ -190,8 +220,9 @@ button:hover {
 }
 
 .icon {
-    margin: 20px 0;
+    margin: 10px 0;
 }
+
 
 .icon > *:first-child {
     margin-right: 20px;
@@ -204,6 +235,10 @@ button:hover {
 
     textarea {
         max-width: 50vw;
+    }
+    input{
+        max-width: 50vw;
+
     }
 }
 
@@ -236,6 +271,9 @@ button:hover {
     textarea {
         width: calc(90vw - 32px);
         height: 90px;
+    }
+     input {
+        width: calc(90vw - 32px);
     }
 
     .icon {

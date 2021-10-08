@@ -37,7 +37,14 @@ export default {
                 result.appendChild(canvas)
             })
         }
-    }
+    },
+       created()
+    {
+            if(localStorage.login!=1){
+                 this.$router.push('/AdminLogin')
+
+            }
+    },
 };
 </script>
 
@@ -76,6 +83,10 @@ export default {
 .title > span {
     text-align: start;
     line-height: 110px;
+}
+
+.title > div {
+    line-height: 100px;
 }
 
 .input-data {

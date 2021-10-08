@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Generate from '../views/Generate.vue'
 import Admin from '../views/Admin'
-
+import AdminLogin from '../views/AdminLogin'
 Vue.use(VueRouter)
 
 const routes = [
@@ -11,6 +11,11 @@ const routes = [
     path: '/Generate',
     name: 'Generate',
     component: Generate
+  },
+  {
+    path: '/AdminLogin',
+    name: 'AdminLogin',
+    component: AdminLogin
   },
   {
     path: '/Admin',

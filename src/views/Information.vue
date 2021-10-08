@@ -1,18 +1,21 @@
 <template>
     <div class="about">
         <grid :cols="col" :rows="row" />
+        
     </div>
+    
 </template>
 
 <script>
-import firebase from "firebase";
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 import Grid from "gridjs-vue";
 
 export default {
     data() {
         return {
             db: null,
-            col: ["date", "thought"],
+            col: ["date", "Title","Thought"],
             row: [],
         };
     },
@@ -44,12 +47,19 @@ export default {
                     tempDoc.forEach((element) => {
                         let data = [];
                         data.push(this.timeFormat(element.date.seconds, element.date.nanoseconds));
-                        data.push(element.thought);
+                        data.push(element.title,element.thought);
 
                         this.row.push(data);
                     });
                 });
         },
+    },
+    created()
+    {
+            if(localStorage.login!=1){
+                 this.$router.push('/AdminLogin')
+
+            }
     },
     mounted() {
         const firebaseConfig = {
@@ -70,4 +80,7 @@ export default {
 </script>
 
 <style scoped>
+.about{
+line-height: 26pt;
+}
 </style>
