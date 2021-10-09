@@ -5,8 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --mode production",
-    "lint": "vue-cli-service lint",
-    "test-build": "serve -s dist"
+    "test-build": "serve -s dist",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "core-js": "^3.6.5",
