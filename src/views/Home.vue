@@ -69,9 +69,14 @@ export default {
     
     methods: {
         addThought() {
+            const currentEnv = process.env.VUE_APP_environment;
+            let collectionName = "knongjit"
+            if (currentEnv == "development") {
+                collectionName = "knongjitDevelopment"
+            }
             const dateTime = firebase.firestore.Timestamp.fromDate(new Date());
             this.db
-                .collection("knongjit")
+                .collection(collectionName)
                 .add({ date: dateTime, title:this.title,thought: this.thought })
                 .then(() =>
                     this.$notify({
@@ -84,8 +89,12 @@ export default {
             this.thought = "";
             this.title="";
         },
+         isEmpty(value){
+            return !value.split(" ").join("").length; 
+           
+        },
         clickAddThought() {
-            if (this.thought &&this.title) {
+           if(!this.isEmpty(this.thought)&&!this.isEmpty(this.title)){
                 this.addThought();
             } else {
                 this.$notify({
@@ -94,8 +103,7 @@ export default {
                     text: "Hey there, it seems like you dont have anything to say?",
                     type: "error",
                 });
-            }
-        },
+                     }}        
     },
     mounted() {
         const firebaseConfig = {
@@ -156,6 +164,7 @@ input {
     outline: none;
     border: none;
     font-size: 16px;
+    border-radius: 8px;
     
 }
 #anxiety-image {
@@ -196,6 +205,8 @@ textarea {
     outline: none;
     border: none;
     font-size: 16px;
+        border-radius: 8px;
+
 }
 
 button {
