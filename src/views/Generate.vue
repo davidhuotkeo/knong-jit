@@ -51,42 +51,28 @@ export default {
 <style scoped>
 .preview {
     color: white;
-    width: 1080px;
-    height: 1080px;
+    width: 1024px;
+    height: 1024px;
 }
 
 .data {
     position: absolute;
-    top: 0;
-    width: 1080px;
-    display: grid;
-    height: 1080px;
-    grid-template-rows: 300px auto;
+    bottom: 10px;
+    text-align: start;
+    margin-left: 120px;
 }
 
 .id {
-    justify-self: flex-end;
-    margin: 110px;
-    font-size: 30px;
-}
-
-.title {
-    justify-self: start;
-    text-align: start;
-    display: grid;
-    align-content: end;
-    margin: 0 110px 110px 110px;
-    font-size: 80px;
-    font-weight: bolder;
-}
-
-.title > span {
-    text-align: start;
-    line-height: 110px;
+    font-size: 42px;
+    opacity: 0.8;
 }
 
 .title > div {
     line-height: 100px;
+    font-size: 85px;
+    max-width: 784px;
+    margin-top: 38px;
+    font-weight: bolder;
 }
 
 .input-data {
