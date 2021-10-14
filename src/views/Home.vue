@@ -217,6 +217,13 @@ button:hover {
 .icon > *:first-child {
     margin-right: 20px;
 }
+@media only screen and (max-height: 850px) {
+    #main{
+        height: auto;
+        width: auto;
+    }
+
+}
 @media only screen and (min-width: 1000px) {
     .description {
         width: 40vw;
