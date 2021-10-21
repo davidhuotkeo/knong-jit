@@ -61,7 +61,7 @@ export default {
     bottom: 10px;
     text-align: start;
     margin-left: 120px;
-    margin-bottom: 38px;
+    margin-bottom: 100px;
 
 }
 

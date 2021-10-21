@@ -65,7 +65,7 @@ export default {
             title:"",
         };
     },
-    
+
     methods: {
         addThought() {
             const currentEnv = process.env.VUE_APP_environment;
@@ -76,7 +76,7 @@ export default {
             const dateTime = firebase.firestore.Timestamp.fromDate(new Date());
             this.db
                 .collection(collectionName)
-                .add({ date: dateTime, title:this.title,thought: this.thought })
+                .add({ date: dateTime, title:this.title,thought:this.replaceLine(this.thought)})
                 .then(() =>
                     this.$notify({
                         group: "noti",
@@ -87,6 +87,9 @@ export default {
                 );
             this.thought = "";
             this.title="";
+        },
+        replaceLine(value){
+            return value.replaceAll("\n", "[newLine*]");
         },
          isEmpty(value){
             return !value.split(" ").join("").length; 

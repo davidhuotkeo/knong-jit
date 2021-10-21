@@ -1,15 +1,16 @@
 <template>
     <div class="about">
-        <grid :cols="col" :rows="row" />
-        
+        <div v-for="datas in row" :key="datas.id">
+            <BoxSubmission :title=datas.title :content=datas.thought :date=datas.date :number=datas.number />
+        </div>
     </div>
     
 </template>
 
 <script>
+import BoxSubmission from '../components/BoxSubmission'
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-import Grid from "gridjs-vue";
 
 export default {
     data() {
@@ -20,9 +21,12 @@ export default {
         };
     },
     components: {
-        Grid,
+        BoxSubmission,
     },
     methods: {
+         convertLine(value){
+            return value.replaceAll("[newLine*]", "/n");
+        },
         timeFormat(seconds, nanoseconds) {
             const date = new firebase.firestore.Timestamp(
                 seconds,
@@ -37,24 +41,23 @@ export default {
             if (currentEnv == "development") {
                 collectionName = "knongjitDevelopment"
             }
-
-            const now = new Date();
-            const lastDay = new Date(now.setDate(now.getDate() - 7));
-
             this.db
                 .collection(collectionName)
                 .orderBy("date", "desc")
-                .where("date", ">=", lastDay)
                 .get()
                 .then((querySnapshot) => {
                     const tempDoc = querySnapshot.docs.map((doc) => {
                         return { id: doc.id, ...doc.data() };
                     });
+                    let countSubmission = tempDoc.length;
                     tempDoc.forEach((element) => {
-                        let data = [];
-                        data.push(this.timeFormat(element.date.seconds, element.date.nanoseconds));
-                        data.push(element.title,element.thought);
-
+                        let data = {
+                            date: this.timeFormat(element.date.seconds, element.date.nanoseconds),
+                            title: element.title,
+                            thought: element.thought,
+                            number: countSubmission
+                        };
+                        countSubmission--;
                         this.row.push(data);
                     });
                 });
@@ -87,6 +90,20 @@ export default {
 
 <style scoped>
 .about{
-line-height: 26pt;
+    line-height: 24px;
+    margin-top: 3%;
+    display: grid;
+    justify-content: center;
+}
+.boxOfTotal{
+    background-color: #f9fafb;
+    box-shadow: 0 1px 4px 0 rgba(231, 131, 131, 0.9);
+    transition: 0.3s;
+     width: 200px;
+     margin-left: auto;
+     margin-right: auto;
+    }
+.boxOfTotal > span{
+    color: blue;
 }
 </style>
