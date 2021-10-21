@@ -24,8 +24,8 @@ export default {
         BoxSubmission,
     },
     methods: {
-         convertLine(value){
-            return value.replaceAll("[newLine*]", "/n");
+         revertLine(value){
+            return value.replaceAll("[newLine*]", "\n");
         },
         timeFormat(seconds, nanoseconds) {
             const date = new firebase.firestore.Timestamp(
@@ -51,10 +51,12 @@ export default {
                     });
                     let countSubmission = tempDoc.length;
                     tempDoc.forEach((element) => {
+                        let thoughtFormatted = this.revertLine(element.thought)
+
                         let data = {
                             date: this.timeFormat(element.date.seconds, element.date.nanoseconds),
                             title: element.title,
-                            thought: element.thought,
+                            thought: thoughtFormatted,
                             number: countSubmission
                         };
                         countSubmission--;
