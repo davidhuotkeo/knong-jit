@@ -91,8 +91,13 @@ export default {
         
 }
 input {
-    height: 30px;
+   height: 25px;
     width: 80%;
+        border-radius: 6px;
+  padding: 8px;
+    outline: none;
+    border: none;
+    font-size: 16px;
 }
 button {
     width: 30%;

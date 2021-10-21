@@ -25,7 +25,7 @@
                 </div>
                 <div class="input-items">
                     <p class="label">Your story</p>
-                    <p id="word">{{ thought.split(" ").length }} words</p>
+                    <p id="word">{{ thought.split(" ").length-1 }} words</p>
                 </div>
                
                 <textarea
@@ -56,7 +56,6 @@ The cat was playing in the garden.</textarea
 <script>
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-
 export default {
     name: "App",
     data() {
@@ -66,7 +65,7 @@ export default {
             title:"",
         };
     },
-    
+
     methods: {
         addThought() {
             const currentEnv = process.env.VUE_APP_environment;
@@ -77,7 +76,7 @@ export default {
             const dateTime = firebase.firestore.Timestamp.fromDate(new Date());
             this.db
                 .collection(collectionName)
-                .add({ date: dateTime, title:this.title,thought: this.thought })
+                .add({ date: dateTime, title:this.title,thought:this.thought})
                 .then(() =>
                     this.$notify({
                         group: "noti",
@@ -114,7 +113,6 @@ export default {
             messagingSenderId: process.env.VUE_APP_messagingSenderId,
             appId: process.env.VUE_APP_appId,
         };
-
         const db = firebase.initializeApp(firebaseConfig).firestore();
         this.db = db;
     },
@@ -139,7 +137,6 @@ export default {
     flex-direction: column;
     justify-content: center;
 }
-
 .input {
     display: flex;
     flex-direction: column;
@@ -147,12 +144,10 @@ export default {
     height: 100vh;
     justify-content: space-around;
 }
-
 #logo {
     width: 200px;
     margin-top: 20px;
 }
-
 p {
     margin: 0;
 }
@@ -170,20 +165,17 @@ input {
 #anxiety-image {
     width: 170px;
 }
-
 .knong-jit-title {
     font-size: 32px;
     font-weight: bolder;
     margin: 32px 0 8px 0;
 }
-
 .description {
     font-size: 16px;
     font-weight: 500;
     line-height: 24px;
     max-width: 50vw;
 }
-
 .input-items {
     display: flex;
     justify-content: space-between;
@@ -191,13 +183,11 @@ input {
     margin-bottom: 8px;
     margin-top: 15px;
 }
-
 .user-input {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 textarea {
     height: 133px;
     width: 60vw;
@@ -206,9 +196,7 @@ textarea {
     border: none;
     font-size: 16px;
         border-radius: 8px;
-
 }
-
 button {
     width: 200px;
     color: rgba(0, 0, 0, 0.8);
@@ -220,60 +208,53 @@ button {
     font-size: 16px;
     font-weight: bold;
 }
-
 button:hover {
     background-color: #CFD0D1;
 }
-
 .icon {
     margin: 10px 0;
 }
-
-
 .icon > *:first-child {
     margin-right: 20px;
 }
+@media only screen and (max-height: 850px) {
+    #main{
+        height: auto;
+        width: auto;
+    }
 
+}
 @media only screen and (min-width: 1000px) {
     .description {
         width: 40vw;
     }
-
     textarea {
         max-width: 50vw;
     }
     input{
         max-width: 50vw;
-
     }
 }
-
 @media only screen and (max-width: 500px) {
     p {
         font-size: 14px;
     }
-
     .knong-jit-title {
         font-size: 24px;
     }
-
     #logo {
         width: 150px;
     }
-
     #anxiety-image {
         width: 175px;
     }
-
     #word {
         right: 5%;
     }
-
     .description {
         max-width: 90vw;
         font-size: 14px;
     }
-
     textarea {
         width: calc(90vw - 32px);
         height: 90px;
@@ -281,9 +262,9 @@ button:hover {
      input {
         width: calc(90vw - 32px);
     }
-
     .icon {
         margin-bottom: 20px;
     }
 }
+
 </style>

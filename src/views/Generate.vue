@@ -49,10 +49,11 @@ export default {
 </script>
 
 <style scoped>
-.preview {
-    color: white;
+.preview{
+    color: #fff;
     width: 1024px;
     height: 1024px;
+    position: relative;
 }
 
 .data {
@@ -60,6 +61,8 @@ export default {
     bottom: 10px;
     text-align: start;
     margin-left: 120px;
+    margin-bottom: 100px;
+
 }
 
 .id {
