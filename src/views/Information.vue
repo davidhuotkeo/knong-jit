@@ -1,7 +1,9 @@
 <template>
     <div class="about">
         <div v-for="datas in row" :key="datas.id">
-            <BoxSubmission :title=datas.title :content=datas.thought :date=datas.date :number=datas.number />
+            <BoxSubmission :title=datas.title :content=datas.thought 
+            :date=datas.date :number=datas.number :star=datas.star 
+            :id=datas.id     @update-to-db="changeValue"  />
         </div>
     </div>
     
@@ -18,14 +20,29 @@ export default {
             db: null,
             col: ["date", "Title","Thought"],
             row: [],
+            value1:null
         };
     },
     components: {
         BoxSubmission,
     },
     methods: {
-         revertLine(value){
-            return value.replaceAll("[newLine*]", "\n");
+         changeValue(star,id){
+          this.db
+            .collection('knongjit')
+            .doc(id)
+            .update({
+                star: star,
+                })
+            .then(() => {
+                console.log('Doc updated')
+                })
+            .catch((error) => {
+                console.log(error)
+                })
+    },
+         convertLine(value){
+            return value.replaceAll("[newLine*]", "/n");
         },
         timeFormat(seconds, nanoseconds) {
             const date = new firebase.firestore.Timestamp(
@@ -51,13 +68,13 @@ export default {
                     });
                     let countSubmission = tempDoc.length;
                     tempDoc.forEach((element) => {
-                        let thoughtFormatted = this.revertLine(element.thought)
-
                         let data = {
                             date: this.timeFormat(element.date.seconds, element.date.nanoseconds),
                             title: element.title,
-                            thought: thoughtFormatted,
-                            number: countSubmission
+                            thought: element.thought,
+                            star:element.star,
+                            number: countSubmission,
+                            id:element.id
                         };
                         countSubmission--;
                         this.row.push(data);
@@ -104,8 +121,10 @@ export default {
      width: 200px;
      margin-left: auto;
      margin-right: auto;
-    }
+}
+
 .boxOfTotal > span{
     color: blue;
 }
+
 </style>

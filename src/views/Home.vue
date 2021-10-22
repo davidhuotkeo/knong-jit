@@ -76,7 +76,7 @@ export default {
             const dateTime = firebase.firestore.Timestamp.fromDate(new Date());
             this.db
                 .collection(collectionName)
-                .add({ date: dateTime, title:this.title,thought:this.thought})
+                .add({ date: dateTime, title:this.title,thought:this.thought,star:"0"})
                 .then(() =>
                     this.$notify({
                         group: "noti",

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "element-ui": "^2.15.6",
     "firebase": "^8.6.1",
     "firebase-admin": "^9.8.0",
     "gridjs-vue": "^4.0.0",
