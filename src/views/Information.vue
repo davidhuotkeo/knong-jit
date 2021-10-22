@@ -71,7 +71,7 @@ export default {
                         let data = {
                             date: this.timeFormat(element.date.seconds, element.date.nanoseconds),
                             title: element.title,
-                            thought: element.thought,
+                            thought: this.convertLine(element.thought),
                             star:element.star,
                             number: countSubmission,
                             id:element.id
