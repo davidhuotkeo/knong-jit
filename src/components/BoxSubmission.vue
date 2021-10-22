@@ -2,7 +2,7 @@
 export default {
      props: {
         title: {
-             type: String,
+            type: String,
             default: 'No title',
             },
         content:{
@@ -16,15 +16,27 @@ export default {
         number:{
           type:String,
           default:'0'  
+        },
+        star:{
+            type:String,
+            default:'0'
+        },
+        id:{
+            type:String,
+            default:'0'
         }
-        
 
+    },methods:{
+        changeValue(star,id) {
+            this.$emit('update-to-db', star, id)
+    },
     },
     data(){
         return{
-
-        }
-    }
+             colors: ['#99A9BF', '#F7BA2A', '#FF9900'],
+             userId:"0",
+        } 
+    },
 }
 </script>
 <template>
@@ -37,6 +49,9 @@ export default {
        </div>
        <div class="content">
            <pre>{{content}}</pre>
+       </div>
+       <div class="starRating">
+             <el-rate v-model="star" @change="changeValue(star,id)" :colors="colors"></el-rate>
        </div>
        <div class="number">
            <p>{{number}}</p>
@@ -77,7 +92,9 @@ export default {
     text-align: right;
     color: grey;
 }
-
+.starRating{
+    margin-top: 10px;
+}
 pre {
   inline-size: 100%;
   white-space: pre-wrap;
