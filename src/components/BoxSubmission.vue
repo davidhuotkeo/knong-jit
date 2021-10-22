@@ -51,7 +51,8 @@ export default {
            <pre>{{content}}</pre>
        </div>
        <div class="starRating">
-             <el-rate v-model="star" @change="changeValue(star,id)" :colors="colors"></el-rate>
+             <el-rate v-model="star" @change="changeValue(star,id)" :colors="colors"   
+             :texts="['oops', 'disappointed', 'normal', 'good', 'great']" show-text></el-rate>
        </div>
        <div class="number">
            <p>{{number}}</p>
